@@ -14,7 +14,7 @@ from pprint import pprint
 try:
     import docker
 except ImportError as e:
-    print("Trying installing docker module with pip install docker")
+    print("Try installing docker module with pip install docker")
     print(sys.path)
     raise
 
