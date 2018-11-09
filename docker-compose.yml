@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  master:
+    image: bot:master
+    build:
+      context: .
+      dockerfile: Dockerfile.master
+    command: ["/usr/sbin/init"]
+    privileged: True
+    hostname: spidermaster
+    privileged: True
+    volumes: 
+      - "./saltstack:/srv"
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    networks: 
+      saltnet:
+        aliases:
+          - spidermaster
+          - saltmaster
+          - master
+
+  minion:
+    image: bot:minion
+    build:
+      context: .
+      dockerfile: Dockerfile.minion
+      args:
+        masterip: spidermaster
+    command: ["/usr/sbin/init"]
+    privileged: True
+    volumes: 
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    networks:
+      saltnet:
+
+  
+networks:
+  saltnet:
+      

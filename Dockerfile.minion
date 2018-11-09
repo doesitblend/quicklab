@@ -1,0 +1,9 @@
+# -*- mode: Dockerfile -*-
+FROM base:latest
+
+ARG masterip
+RUN echo "master: ${masterip}" > /etc/salt/minion
+RUN echo "log_level_logfile: trace" >> /etc/salt/minion
+RUN rm -rf /var/cache/yum
+RUN systemctl enable salt-minion
+CMD ["/usr/sbin/init"]
