@@ -2,7 +2,7 @@ version: '3'
 
 services:
   master:
-    image: bot:master
+    image: quicklab:master
     build:
       context: .
       dockerfile: Dockerfile.master
@@ -16,12 +16,11 @@ services:
     networks: 
       saltnet:
         aliases:
-          - spidermaster
           - saltmaster
           - master
 
   minion:
-    image: bot:minion
+    image: quicklab:minion
     build:
       context: .
       dockerfile: Dockerfile.minion
