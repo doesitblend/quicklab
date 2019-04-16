@@ -1,9 +1,10 @@
-FROM base:latest
+FROM local:2019.2.0
 
 RUN yum install -y vim iproute && yum clean all
 RUN rm -rf /var/cache/yum
 RUN echo "colorscheme desert" > /root/.vimrc
-RUN echo "auto_accept: True" > /etc/salt/master
-RUN echo "log_level_logfile: trace" >> /etc/salt/master
-RUN systemctl enable salt-master
+RUN cat /dev/null > /etc/salt/master
+RUN echo "auto_accept: True" > /etc/salt/master.d/base.conf
+RUN echo "log_level_logfile: trace" >> /etc/salt/master.d/logging.conf
+#RUN systemctl enable salt-master
 CMD ["/usr/sbin/init"]

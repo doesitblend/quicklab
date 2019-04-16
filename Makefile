@@ -1,6 +1,6 @@
 clean:
 	echo "This step should remove all related images"
-	docker container ls -a -q | xargs -n 1 docker rm
+	
 	docker image prune -a -f 
 	docker rmi base:latest
 	docker rmi base:master

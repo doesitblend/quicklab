@@ -1,9 +1,11 @@
 # -*- mode: Dockerfile -*-
-FROM base:latest
+FROM local:2019.2.0
 
 ARG masterip
-RUN echo "master: ${masterip}" > /etc/salt/minion
-RUN echo "log_level_logfile: trace" >> /etc/salt/minion
+
+RUN cat /dev/null > /etc/salt/minion
+RUN echo "master: ${masterip}" > /etc/salt/minion.d/connection.conf
+RUN echo "log_level_logfile: trace" >> /etc/salt/minion.d/logging.conf
 RUN rm -rf /var/cache/yum
-RUN systemctl enable salt-minion
+#RUN systemctl enable salt-minion
 CMD ["/usr/sbin/init"]

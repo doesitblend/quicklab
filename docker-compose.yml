@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.master
-    command: ["/usr/sbin/init"]
+    command: ["/usr/bin/salt-master","-l","debug"]
     privileged: True
     hostname: saltmaster
     privileged: True
@@ -26,7 +26,7 @@ services:
       dockerfile: Dockerfile.minion
       args:
         masterip: saltmaster
-    command: ["/usr/sbin/init"]
+    command: ["/usr/bin/salt-minion","-l","debug"]
     privileged: True
     volumes: 
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
